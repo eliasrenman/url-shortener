@@ -1,5 +1,6 @@
 use self::db::models::Urls;
-use crate::db::schema::urls::dsl::*;
+use super::schema::urls::dsl::*;
+use super::schema::urls::*;
 use crate::*;
 use chrono::NaiveDateTime;
 use diesel::{delete, dsl::insert_into, prelude::*, result::Error};
@@ -15,7 +16,7 @@ pub fn upsert_entry(
     time_to_live: Option<NaiveDateTime>,
 ) -> Result<usize, Error> {
     let connection = &mut establish_connection();
-    insert_into(urls)
+    insert_into(table)
         .values((url.eq(path), destination_url.eq(dest), ttl.eq(time_to_live)))
         .on_conflict(url)
         .do_update()

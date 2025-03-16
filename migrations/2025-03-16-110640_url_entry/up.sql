@@ -14,6 +14,6 @@ UPDATE urls
 SET
   updated_at = STRFTIME ('%Y-%m-%d %H:%M:%f', 'NOW')
 WHERE
-  URLS = NEW.URLS;
+  url = NEW.url;
 
 END;

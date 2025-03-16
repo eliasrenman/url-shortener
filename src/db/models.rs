@@ -2,7 +2,7 @@ use super::schema::urls;
 use chrono::NaiveDateTime;
 use diesel::prelude::*;
 
-#[derive(Queryable, Selectable)]
+#[derive(Queryable, Selectable, AsChangeset)]
 #[diesel(table_name = urls)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct Urls {
