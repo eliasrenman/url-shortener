@@ -1,0 +1,12 @@
+[package]
+name = "url-shortener"
+version = "0.1.0"
+edition = "2024"
+build = "build.rs"
+
+[dependencies]
+chrono = "0.4.40"
+diesel = { version = "2.2.8", features = ["sqlite","chrono"] }
+dotenvy = "0.15.7"
+rocket = "0.5.1"
+serde = "1.0.219"
