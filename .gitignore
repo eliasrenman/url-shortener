@@ -2,3 +2,4 @@
 *.db
 .env
 Rocket.toml
+.DS_Store
