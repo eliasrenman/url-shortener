@@ -11,16 +11,26 @@ pub fn get_entry(path: &str) -> Result<Urls, Error> {
 }
 
 pub fn upsert_entry(
+    username: &str,
     path: &str,
     dest: &str,
     time_to_live: Option<NaiveDateTime>,
 ) -> Result<usize, Error> {
     let connection = &mut establish_connection();
     insert_into(table)
-        .values((url.eq(path), destination_url.eq(dest), ttl.eq(time_to_live)))
+        .values((
+            url.eq(path),
+            destination_url.eq(dest),
+            ttl.eq(time_to_live),
+            owned_by.eq(username),
+        ))
         .on_conflict(url)
         .do_update()
-        .set((destination_url.eq(dest), ttl.eq(time_to_live)))
+        .set((
+            destination_url.eq(dest),
+            ttl.eq(time_to_live),
+            owned_by.eq(username),
+        ))
         .execute(connection)
 }
 

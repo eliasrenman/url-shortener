@@ -3,7 +3,7 @@ CREATE TABLE urls (
   url TEXT PRIMARY KEY NOT NULL,
   destination_url TEXT NOT NULL,
   ttl DATETIME,
-  owned_by TEXT,
+  owned_by TEXT NOT NULL CHECK (owned_by = owned_by),
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

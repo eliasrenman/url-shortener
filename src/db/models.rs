@@ -9,6 +9,7 @@ pub struct Urls {
     pub url: String,
     pub destination_url: String,
     pub ttl: Option<NaiveDateTime>,
+    pub owned_by: String,
     pub created_at: Option<NaiveDateTime>,
     pub updated_at: Option<NaiveDateTime>,
 }

@@ -10,8 +10,8 @@ pub fn handle_redirect(url: &str) -> Result<Redirect, (Status, &'static str)> {
     Ok(Redirect::to(row.destination_url))
 }
 
-pub fn handle_upsert(dto: UpsertUrlDto<'_>) -> (Status, &'static str) {
-    let row = upsert_entry(dto.url, dto.destination_url, dto.ttl);
+pub fn handle_upsert(username: &str, dto: UpsertUrlDto<'_>) -> (Status, &'static str) {
+    let row = upsert_entry(username, dto.url, dto.destination_url, dto.ttl);
     if row.is_err() {
         return (Status::BadRequest, "Failed to upsert redirect");
     }
