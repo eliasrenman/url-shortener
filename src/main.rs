@@ -72,6 +72,6 @@ fn upsert(user: User, upsert: Json<dto::UpsertUrlDto<'_>>) -> (Status, &'static 
 }
 
 #[delete("/<url>")]
-fn delete(url: &str) -> (Status, &'static str) {
-    handle_delete(url)
+fn delete(user: User, url: &str) -> (Status, &'static str) {
+    handle_delete(&user.id.as_str(), url)
 }

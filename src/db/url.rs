@@ -34,7 +34,7 @@ pub fn upsert_entry(
         .execute(connection)
 }
 
-pub fn delete_entry(path: &str) -> Result<usize, Error> {
+pub fn delete_entry(id: &str, path: &str) -> Result<usize, Error> {
     let connection = &mut establish_connection();
-    delete(urls.filter(url.eq(path))).execute(connection)
+    delete(urls.filter(url.eq(path)).filter(owned_by.eq(id))).execute(connection)
 }

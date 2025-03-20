@@ -10,16 +10,16 @@ pub fn handle_redirect(url: &str) -> Result<Redirect, (Status, &'static str)> {
     Ok(Redirect::to(row.destination_url))
 }
 
-pub fn handle_upsert(username: &str, dto: UpsertUrlDto<'_>) -> (Status, &'static str) {
-    let row = upsert_entry(username, dto.url, dto.destination_url, dto.ttl);
+pub fn handle_upsert(id: &str, dto: UpsertUrlDto<'_>) -> (Status, &'static str) {
+    let row = upsert_entry(id, dto.url, dto.destination_url, dto.ttl);
     if row.is_err() {
         return (Status::BadRequest, "Failed to upsert redirect");
     }
     (Status::Ok, "Successfully upserted redirect")
 }
 
-pub fn handle_delete(url: &str) -> (Status, &'static str) {
-    let row = delete_entry(url);
+pub fn handle_delete(id: &str, url: &str) -> (Status, &'static str) {
+    let row = delete_entry(id, url);
     if row.is_err() {
         return (Status::BadRequest, "Failed to delete redirect");
     }
