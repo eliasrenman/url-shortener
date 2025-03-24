@@ -5,12 +5,12 @@ import { queryClient } from "./client";
 export type UrlUpsertDto = {
   url: string;
   destinationUrl: string;
-  ttl: Date;
+  ttl?: Date;
 };
 export type Url = {
   url: string;
   destinationUrl: string;
-  ttl: Date;
+  ttl?: Date;
   ownedBy: string;
   createdAt: Date;
   updatedAt: Date;

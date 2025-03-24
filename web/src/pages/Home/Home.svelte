@@ -8,29 +8,33 @@
 
 <Navbar />
 
-<div class="h-screen flex items-center justify-center flex-col">
-  <table>
-    <thead>
-      <tr>
-        <th>Shortform</th>
-        <th>Destination</th>
-        <th>Time to live</th>
-        <th>Action</th>
-      </tr>
-    </thead>
+<div class="max-w-3xl mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">URL Shortener</h1>
+
+  <!-- Table -->
+  <div class="bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden">
     {#if $urls.isLoading}
-      <tr>
-        <td><p>Loading...</p></td>
-      </tr>
+      <p>Loading...</p>
     {:else if $urls.isError}
-      <tr>
-        <td><p>Error: {$urls.error.message}</p></td>
-      </tr>
+      <p>Error: {$urls.error.message}</p>
     {:else if $urls.isSuccess}
-      {#each $urls.data.data as row}
-        <Row {row} />
-      {/each}
+      <table class="w-full text-left">
+        <thead class="bg-gray-900">
+          <tr>
+            <th class="p-3">Shortform</th>
+            <th class="p-3">Destination</th>
+            <th class="p-3">Expire date</th>
+            <th class="p-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each $urls.data.data as row}
+            <Row {row} />
+          {/each}
+        </tbody>
+      </table>
     {/if}
-  </table>
+  </div>
+
   <Create />
 </div>

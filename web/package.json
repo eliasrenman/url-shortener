@@ -19,6 +19,7 @@
     "vite": "^6.2.0"
   },
   "dependencies": {
+    "@lucide/svelte": "^0.483.0",
     "@tailwindcss/vite": "^4.0.14",
     "@tanstack/svelte-query": "^5.69.0",
     "axios": "^1.8.4",

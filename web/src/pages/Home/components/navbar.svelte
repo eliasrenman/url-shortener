@@ -1,13 +1,12 @@
 <script lang="ts">
-  import Icon from "@common/Icon.svelte";
   import { decodeJwt } from "./jwt";
-
+  import { LogOut } from "@lucide/svelte";
   const payload = decodeJwt();
 </script>
 
 <div class="flex flexbox justify-between">
   <p>{payload?.name}</p>
   <a href="/logout">
-    <Icon name="logout" class="h-5 w-5" />
+    <LogOut class="h-5 w-5" />
   </a>
 </div>
