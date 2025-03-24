@@ -33,7 +33,7 @@
   };
 </script>
 
-<form method="POST" on:submit={handleSubmit}>
+<form method="POST" on:submit={handleSubmit} id="form">
   <div class="flex mt-4 p-4 bg-gray-800 rounded-lg shadow-lg gap-4 flex-col">
     <div class="flex flex-row gap-2 justify-center items-center">
       <p>{window.location.origin}/</p>

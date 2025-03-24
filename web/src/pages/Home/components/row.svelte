@@ -10,6 +10,17 @@
       $mutation.mutate(row.url);
     }
   }
+
+  function editItem() {
+    const form = document.getElementById("form") as HTMLFormElement;
+    form.reset();
+    for (const [key, value] of Object.entries(row)) {
+      const item = form.elements.namedItem(key) as HTMLInputElement;
+      if (!item) continue;
+      if (key === "ttl") continue;
+      item.value = value as string;
+    }
+  }
 </script>
 
 <tr class="border-t border-gray-700 hover:bg-gray-700 transition">
@@ -25,7 +36,10 @@
     >{row.ttl ? new Date(row.ttl).toLocaleTimeString() : "Never"}</td
   >
   <td class="p-3 flex gap-3">
-    <button class="text-blue-600 hover:text-blue-500 cursor-pointer transition">
+    <button
+      onclick={editItem}
+      class="text-blue-600 hover:text-blue-500 cursor-pointer transition"
+    >
       <Edit size={18} />
     </button>
     <button
