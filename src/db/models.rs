@@ -1,8 +1,10 @@
 use super::schema::urls;
 use chrono::NaiveDateTime;
 use diesel::prelude::*;
+use serde::Serialize;
 
-#[derive(Queryable, Selectable, AsChangeset)]
+#[derive(Serialize, Queryable, Selectable, AsChangeset)]
+#[serde(rename_all(serialize = "camelCase"))]
 #[diesel(table_name = urls)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct Urls {

@@ -3,7 +3,7 @@ use std::env;
 use chrono::{TimeDelta, Utc};
 use jsonwebtoken::{DecodingKey, EncodingKey, Header, TokenData, Validation, decode, encode};
 use serde::{Deserialize, Serialize};
-use uuid::{Builder, Uuid};
+use uuid::Builder;
 
 use crate::User;
 
@@ -39,7 +39,7 @@ pub fn create_user_token(user: User) -> Result<std::string::String, jsonwebtoken
 }
 
 pub fn jwts_decode(token: &str) -> Result<TokenData<Claims>, jsonwebtoken::errors::Error> {
-    decode::<Claims>(token, &get_decoding_key(), &Validation::default())
+    decode::<Claims>(token, &get_decoding_key(), &get_validation())
 }
 
 pub fn generate_id(namespace: &str, id: &str) -> String {
@@ -54,3 +54,22 @@ fn get_encoding_key() -> EncodingKey {
 fn get_decoding_key() -> DecodingKey {
     DecodingKey::from_secret(env::var("JWT_SECRET").unwrap().as_ref())
 }
+
+fn get_validation() -> Validation {
+    let address = env::var("BASE_URL").unwrap();
+    let mut validation = Validation::default();
+    validation.set_audience(&[address.clone()]);
+    validation.set_issuer(&[address]);
+    validation.set_required_spec_claims(&["aud", "exp", "iat", "iss", "nbf", "sub", "name"]);
+    validation
+}
+// aud: address.clone(),
+// exp: Utc::now()
+//     .checked_add_signed(TimeDelta::new(week_in_seconds, 0).unwrap())
+//     .unwrap()
+//     .timestamp() as usize,
+// iat: Utc::now().timestamp() as usize,
+// iss: address,
+// nbf: Utc::now().timestamp() as usize,
+// sub: user.id,
+// name: user.username,
