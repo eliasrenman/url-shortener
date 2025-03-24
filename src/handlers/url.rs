@@ -1,3 +1,4 @@
+use chrono::{DateTime, Utc};
 use rocket::{http::Status, response::Redirect};
 
 use crate::{
@@ -11,7 +12,8 @@ pub fn handle_redirect(url: &str) -> Result<Redirect, (Status, &'static str)> {
 }
 
 pub fn handle_upsert(owned_by: &str, url: &str, dto: UpsertUrlDto<'_>) -> (Status, &'static str) {
-    let row = upsert_entry(owned_by, url, dto.destination_url, dto.ttl);
+    let naive_local_datetime = dto.ttl.map(|dt| dt.naive_utc());
+    let row = upsert_entry(owned_by, url, dto.destination_url, naive_local_datetime);
     if row.is_err() {
         return (Status::BadRequest, "Failed to upsert redirect");
     }

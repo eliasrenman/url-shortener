@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mutateUrl, type UrlUpsertDto } from "@/api/url";
+  import { mutateUrl } from "@/api/url";
   import { ArrowDown } from "@lucide/svelte";
 
   const mutation = mutateUrl();

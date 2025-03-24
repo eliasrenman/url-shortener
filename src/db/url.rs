@@ -3,7 +3,7 @@ use super::schema::urls::dsl::*;
 use super::schema::urls::*;
 use crate::*;
 use chrono::NaiveDateTime;
-use diesel::{associations::HasTable, delete, dsl::insert_into, prelude::*, result::Error, select};
+use diesel::{delete, dsl::insert_into, prelude::*, result::Error};
 
 pub fn get_entry(path: &str) -> Result<Urls, Error> {
     let connection = &mut establish_connection();
