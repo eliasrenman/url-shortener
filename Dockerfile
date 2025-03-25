@@ -15,7 +15,7 @@ FROM rust:slim
 
 RUN apt update && \
   apt install -y libsqlite3-dev
-COPY --from=bun-builder /app/web/dist ./web/dist
+COPY --from=bun-builder /app/web/dist /app/web/dist
 
 WORKDIR /app
 
