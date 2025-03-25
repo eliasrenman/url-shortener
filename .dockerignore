@@ -12,3 +12,4 @@ tmp/
 
 Rocket.toml
 .env
+sqlite.db
