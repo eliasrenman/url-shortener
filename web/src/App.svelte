@@ -8,7 +8,7 @@
 </script>
 
 <QueryClientProvider client={queryClient}>
-  <main class="p-4">
+  <main>
     {#if cookies.includes("access_token")}
       <Home />
     {:else}
