@@ -2,12 +2,17 @@ use self::db::models::Urls;
 use super::schema::urls::dsl::*;
 use super::schema::urls::*;
 use crate::*;
-use chrono::NaiveDateTime;
+use chrono::{NaiveDateTime, Utc};
 use diesel::{delete, dsl::insert_into, prelude::*, result::Error};
 
 pub fn get_entry(path: &str) -> Result<Urls, Error> {
     let connection = &mut establish_connection();
-    urls.find(path).select(Urls::as_select()).first(connection)
+    let now = Utc::now().naive_utc();
+
+    urls.find(path)
+        .filter(ttl.is_null().or(ttl.gt(now)))
+        .select(Urls::as_select())
+        .first(connection)
 }
 
 pub fn upsert_entry(

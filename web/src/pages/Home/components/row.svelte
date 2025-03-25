@@ -1,6 +1,7 @@
 <script lang="ts">
   import { mutateDeleteUrl, type Url } from "@/api/url";
   import { Edit, Trash } from "@lucide/svelte";
+  import { formatRelative } from "date-fns";
 
   let { row }: { row: Url } = $props();
 
@@ -33,7 +34,10 @@
     ></td
   >
   <td class="p-3 truncate"
-    >{row.ttl ? new Date(row.ttl).toLocaleTimeString() : "Never"}</td
+    >{row.ttl
+      ? // Manually specifying Z at the end here since the date format saved in the database removes timezone info but we know it is saved as UTC+0
+        formatRelative(new Date(row.ttl + "Z"), new Date(), {})
+      : "Never"}</td
   >
   <td class="p-3 flex gap-3">
     <button

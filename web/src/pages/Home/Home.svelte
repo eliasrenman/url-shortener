@@ -23,7 +23,7 @@
           <tr>
             <th class="p-3">Shortform</th>
             <th class="p-3">Destination</th>
-            <th class="p-3">Expire date</th>
+            <th class="p-3">Expires at</th>
             <th class="p-3">Actions</th>
           </tr>
         </thead>
