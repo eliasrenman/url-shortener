@@ -12,6 +12,10 @@ Generate a secret for rocket
 ```Bash
 openssl rand -base64 32
 ```
+Copy sqlite database with inital migrations already done
+```Bash
+cp ./sqlite.db.inital ./sqlite.db
+```
 Start docker container with:
 ```bash
 docker run -p 8000:8000 \
