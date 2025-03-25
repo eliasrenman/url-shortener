@@ -1,0 +1,14 @@
+# Ignore the .git directory
+.git/
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore all .log files
+*.log
+
+# Ignore temporary files
+tmp/
+
+Rocket.toml
+.env

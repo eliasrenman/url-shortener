@@ -21,15 +21,16 @@ impl From<EmailUserInfo> for User {
         }
     }
 }
+#[allow(dead_code)]
 #[get("/login/email")]
-fn email_login<'a>(cookies: &'a CookieJar<'a>) -> (Status, &'a str) {
+fn email_login<'a>(_cookies: &'a CookieJar<'a>) -> (Status, &'a str) {
     // Create magic link
     // Send email containing magic link
     (Status::Ok, "Email link sent")
 }
-
+#[allow(dead_code)]
 #[get("/auth/email")]
-async fn email_callback(cookies: &CookieJar<'_>) -> Result<Redirect, Debug<Error>> {
+async fn email_callback(_cookies: &CookieJar<'_>) -> Result<Redirect, Debug<Error>> {
     // Validate magic link
     // create token
     // Set a cookie with the user's name, and redirect to the home page.
@@ -40,7 +41,7 @@ async fn email_callback(cookies: &CookieJar<'_>) -> Result<Redirect, Debug<Error
     // );
     Ok(Redirect::to("/"))
 }
-
+#[allow(dead_code)]
 pub fn email_fairing() -> impl Fairing {
     AdHoc::on_ignite("Email Auth", |rocket| async {
         rocket.mount("/api", rocket::routes![email_login, email_callback])

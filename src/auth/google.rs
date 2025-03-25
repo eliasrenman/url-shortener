@@ -39,11 +39,12 @@ impl From<GoogleUserInfo> for User {
         }
     }
 }
+#[allow(dead_code)]
 #[get("/login/google")]
 fn google_login(oauth2: OAuth2<GoogleUserInfo>, cookies: &CookieJar<'_>) -> Redirect {
     oauth2.get_redirect(cookies, &["profile"]).unwrap()
 }
-
+#[allow(dead_code)]
 #[get("/auth/google")]
 async fn google_callback(
     token: TokenResponse<GoogleUserInfo>,
@@ -71,6 +72,7 @@ async fn google_callback(
 
     Ok(Redirect::to("/"))
 }
+#[allow(dead_code)]
 pub fn google_fairing() -> impl Fairing {
     AdHoc::on_ignite("Google OAuth2", |rocket| async {
         rocket

@@ -1,4 +1,3 @@
-use chrono::{DateTime, Utc};
 use rocket::{http::Status, response::Redirect};
 
 use crate::{
